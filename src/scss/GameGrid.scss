@@ -1,0 +1,94 @@
+@import "../scss/variables";
+
+table {
+  background-color: $blue;
+  margin: 0 auto;
+  text-align: center;
+  width: 25%;
+  table-layout: fixed;
+  height: 25vw;
+}
+
+.button {
+  font-size: 0.875rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #fff;
+  background-color: blue;
+  border: 0;
+  padding: 6px 16px;
+  border-radius: 4px;
+  &--reset {
+    margin-top: 4vh;
+  }
+  &--disabled {
+    color: rgba(0, 0, 0, 0.26);
+    box-shadow: none;
+    background-color: rgba(0, 0, 0, 0.12);
+    cursor: auto;
+  }
+}
+
+.announcement {
+  font-size: 4vw;
+  &--player1 {
+    color: $yellow;
+  }
+  &--player2 {
+    color: $red;
+  }
+}
+
+.circle {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50%;
+  display: inline-block;
+  &--white {
+    background-color: #fff;
+  }
+  &--red{
+    background-color: #FF0000;
+  }
+  &--yellow{
+    background-color: #FFFF00;
+  }
+  &--hover {
+    visibility: visible;
+  }
+}
+
+// Offsets colored hover disc above the game grid
+@for $i from 1 through 8 {
+  .circle--hover {
+    &-#{$i} {
+      margin-left: #{((((43 / 6)) * $i) - 28.5) * 1%};
+    }
+  }
+}
+
+// Enlarges game grid on mobile screens
+@media only screen and (max-width: $portable) {
+  table {
+    width: 50%;
+    height: 50vw;
+  }
+  .circle {
+    width: 6vw;
+    height: 6vw;
+  }
+  .announcement {
+    font-size: 8vw;
+  }
+  @for $i from 1 through 8 {
+    .circle--hover {
+      &-#{$i} {
+        margin-left: #{((((85 / 6)) * $i) - 57) * 1%};
+      }
+    }
+  }
+}

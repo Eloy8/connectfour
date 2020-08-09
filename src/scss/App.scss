@@ -1,0 +1,15 @@
+@import "../scss/variables";
+
+.App {
+  text-align: center;
+  &--title{
+    color: $blue;
+    font-size: 4vw;
+  }
+}
+
+@media only screen and (max-width: $portable) {
+  .App--title {
+    font-size: 8vw;
+  }
+}

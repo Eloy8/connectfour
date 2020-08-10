@@ -34,7 +34,8 @@ table {
 }
 
 .announcement {
-  font-size: 4vw;
+  font-size: 2vw;
+  text-shadow: 2px 2px 2px rgba(0, 0, 255, 0.5);
   &--player1 {
     color: $yellow;
   }

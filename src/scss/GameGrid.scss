@@ -49,13 +49,13 @@ table {
   height: 3vw;
   border-radius: 50%;
   display: inline-block;
-  &--white {
+  &-white {
     background-color: #fff;
   }
-  &--red{
+  &-red{
     background-color: #FF0000;
   }
-  &--yellow{
+  &-yellow{
     background-color: #FFFF00;
   }
   &--hover {

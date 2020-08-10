@@ -11,6 +11,19 @@
   }
 }
 
+.circle--title {
+  width: 2vw;
+  height: 2vw;
+  border-radius: 50%;
+  display: inline-block;
+  &-red{
+    background-color: #FF0000;
+  }
+  &-yellow{
+    background-color: #FFFF00;
+  }
+}
+
 @media only screen and (max-width: $portable) {
   .App--title {
     font-size: 8vw;

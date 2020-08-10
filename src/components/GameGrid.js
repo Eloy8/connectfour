@@ -28,9 +28,9 @@ const GameGrid = () => {
     // Return in React Fragment, because "Divs cannot appear as a child of a tr"
     return (
       <>
-        {column === DiscTypes.isNeutral && <div className="circle circle--white"></div>}
-        {column === DiscTypes.isPlayer1 && <div className="circle circle--yellow"></div>}
-        {column === DiscTypes.isPlayer2 && <div className="circle circle--red"></div>}
+        {column === DiscTypes.isNeutral && <div className="circle circle-white"></div>}
+        {column === DiscTypes.isPlayer1 && <div className="circle circle-yellow"></div>}
+        {column === DiscTypes.isPlayer2 && <div className="circle circle-red"></div>}
       </>
     )
   }
@@ -39,8 +39,8 @@ const GameGrid = () => {
     if (!weHaveAWinnerAnnouncement && hoverDiscLocation) {
       return (
         <>
-          {currentPlayer === DiscTypes.isPlayer1 && <div className={`circle circle--yellow circle--hover-${hoverDiscLocation}`}></div>}
-          {currentPlayer === DiscTypes.isPlayer2 && <div className={`circle circle--red circle--hover-${hoverDiscLocation}`}></div>}
+          {currentPlayer === DiscTypes.isPlayer1 && <div className={`circle circle-yellow circle--hover-${hoverDiscLocation}`}></div>}
+          {currentPlayer === DiscTypes.isPlayer2 && <div className={`circle circle-red circle--hover-${hoverDiscLocation}`}></div>}
         </>
       )
     }
@@ -48,7 +48,7 @@ const GameGrid = () => {
     if (weHaveAWinnerAnnouncement || !hoverDiscLocation) {
       return (
         <>
-          <div className="circle circle--white"></div>
+          <div className="circle circle-white"></div>
         </>
       )
     }

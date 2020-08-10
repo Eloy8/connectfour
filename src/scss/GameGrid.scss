@@ -82,8 +82,9 @@ table {
     height: 6vw;
   }
   .announcement {
-    font-size: 8vw;
+    font-size: 4vw;
   }
+
   @for $i from 1 through 8 {
     .circle--hover {
       &-#{$i} {

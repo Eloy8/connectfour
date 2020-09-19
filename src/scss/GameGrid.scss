@@ -70,6 +70,21 @@ table {
       margin-left: #{((((43 / 6)) * $i) - 28.5) * 1%};
     }
   }
+  // .circle--drop{
+  //   &-#{$i} {
+  //     @keyframes DropDiscDown {
+  //       0%{
+  //         transform: translateY(0px);
+  //       }
+  //       50%{
+  //         transform: #{translateY(-15px * $i)};
+  //       }
+  //       100%{
+  //         transform: translateY(0px);
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 // Enlarges game grid on mobile screens

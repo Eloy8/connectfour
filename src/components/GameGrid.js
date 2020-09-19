@@ -22,7 +22,8 @@ const GameGrid = () => {
   const [currentTurn, setCurrentTurn] = useState(defaultTurn);
   const currentPlayer = currentTurn % 2 === 1 ? DiscTypes.isPlayer1 : DiscTypes.isPlayer2;
   const [weHaveAWinnerAnnouncement, setweHaveAWinnerAnnouncement] = useState(false);
-  const [hoverDiscLocation, setHoverDiscLocation] = useState(null);
+  const [hoverDiscLocation, setHoverDiscLocation] = useState("4");
+  const [discIsDropping, setDiscIsDropping] = useState(null);
   
   const renderDiscInGrid = (column) => {
     // Return in React Fragment, because "Divs cannot appear as a child of a tr"
@@ -36,16 +37,18 @@ const GameGrid = () => {
   }
 
   const renderHoverDiscAboveGrid = () => {
-    if (!weHaveAWinnerAnnouncement && hoverDiscLocation) {
+    if (!weHaveAWinnerAnnouncement) {
       return (
         <>
           {currentPlayer === DiscTypes.isPlayer1 && <div className={`circle circle-yellow circle--hover-${hoverDiscLocation}`}></div>}
           {currentPlayer === DiscTypes.isPlayer2 && <div className={`circle circle-red circle--hover-${hoverDiscLocation}`}></div>}
+          {/* {currentPlayer === DiscTypes.isPlayer1 && <div className={`circle circle-yellow circle--hover-${hoverDiscLocation}` + discIsDropping && `circle--drop-${discIsDropping}`}></div>}
+          {currentPlayer === DiscTypes.isPlayer2 && <div className={`circle circle-red circle--hover-${hoverDiscLocation}` + discIsDropping && `circle--drop-${discIsDropping}`}></div>} */}
         </>
       )
     }
     // Renders default a non-visible circle, to avoid spacing problems
-    if (weHaveAWinnerAnnouncement || !hoverDiscLocation) {
+    if (weHaveAWinnerAnnouncement) {
       return (
         <>
           <div className="circle circle-white"></div>
@@ -64,10 +67,19 @@ const GameGrid = () => {
     if (weHaveAWinnerAnnouncement) {
       return;
     }
-    setShowColumnIsFullError(false);
-    updateConnectFourGrid(columnId);
-    updateIndividualColumnHeight(columnId);
-    finishUpRound();
+    // // Shows dropping disc visual
+    // const dropDiscOnHeight = columnId;
+    // setDiscIsDropping(dropDiscOnHeight);
+
+    // // Waits for drop visual to end
+    // setTimeout(() => {
+      setDiscIsDropping(null);
+      setShowColumnIsFullError(false);
+      updateConnectFourGrid(columnId);
+      updateIndividualColumnHeight(columnId);
+      finishUpRound();  
+    // }, 1000);
+    
   }
 
   const updateConnectFourGrid = (columnId) => {
@@ -115,7 +127,7 @@ const GameGrid = () => {
   return (
     <div>
       {renderHoverDiscAboveGrid()}
-      <table className={`table ${!weHaveAWinnerAnnouncement && hoverDiscLocation ? ' table--default' : ''}`}>
+      <table className={`table ${weHaveAWinnerAnnouncement && ' table--default'}`}>
         <tbody>
           {connectFourGrid && connectFourGrid.map((row, rowId) => (
             <tr key={rowId}>
@@ -124,7 +136,8 @@ const GameGrid = () => {
                     key={columnId}
                     onClick={() => dropInADisc(columnId)}
                     onMouseEnter={() => setHoverDiscLocation(columnId + 1)}
-                    onMouseLeave={() => setHoverDiscLocation(null)}>
+                    // onMouseLeave={() => setHoverDiscLocation(null)}
+                    >
                       {renderDiscInGrid(column)}
                   </td>
               ))}

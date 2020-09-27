@@ -1,3 +1,7 @@
+:root {
+  --dropHeight: 155px;
+}
+
 @import "../scss/variables";
 
 table {
@@ -67,24 +71,51 @@ table {
 @for $i from 1 through 8 {
   .circle--hover {
     &-#{$i} {
-      margin-left: #{((((43 / 6)) * $i) - 28.5) * 1%};
+      display: inline-block;
+      margin-left: #{(((43 / 6) * $i) - 28.5) * 1%};
     }
   }
-  // .circle--drop{
-  //   &-#{$i} {
-  //     @keyframes DropDiscDown {
-  //       0%{
-  //         transform: translateY(0px);
-  //       }
-  //       50%{
-  //         transform: #{translateY(-15px * $i)};
-  //       }
-  //       100%{
-  //         transform: translateY(0px);
-  //       }
-  //     }
-  //   }
-  // }
+  .circle--drop{
+    &-#{$i} {
+      animation: DropDiscDown 1s ease-in 1;
+      --dropHeight: calc((80px * #{$i}) - 9px);
+    }
+  }
+}
+
+// Animated drop down animation for the disc, via a settable dropHeight variable
+@keyframes DropDiscDown {
+  0%{
+    transform: translateY(0px);
+  }
+  38%{
+    transform: translateY(var(--dropHeight));
+    animation-timing-function: ease-out;
+  }
+  55%{
+    transform: translateY(calc(var(--dropHeight) - 25px));
+    animation-timing-function: ease-in;
+  }
+  65% {
+    transform: translateY(var(--dropHeight));
+    animation-timing-function: ease-out;
+  }
+  75% {
+    transform: translateY(calc(var(--dropHeight) - 10px));
+    animation-timing-function: ease-in;
+  }
+  80% {
+     transform: translateY(var(--dropHeight));
+     animation-timing-function: ease-out;
+  }
+  85% {
+     transform: translateY(calc(var(--dropHeight) - 5px));
+     animation-timing-function: ease-in;
+  }
+  90%, 100%{
+    transform: translateY(var(--dropHeight));
+    animation-timing-function: ease-out;
+  }
 }
 
 // Enlarges game grid on mobile screens

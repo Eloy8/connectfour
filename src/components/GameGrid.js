@@ -37,49 +37,55 @@ const GameGrid = () => {
   }
 
   const renderHoverDiscAboveGrid = () => {
-    if (!weHaveAWinnerAnnouncement) {
-      return (
-        <>
-          {currentPlayer === DiscTypes.isPlayer1 && <div className={`circle circle-yellow circle--hover-${hoverDiscLocation}`}></div>}
-          {currentPlayer === DiscTypes.isPlayer2 && <div className={`circle circle-red circle--hover-${hoverDiscLocation}`}></div>}
-          {/* {currentPlayer === DiscTypes.isPlayer1 && <div className={`circle circle-yellow circle--hover-${hoverDiscLocation}` + discIsDropping && `circle--drop-${discIsDropping}`}></div>}
-          {currentPlayer === DiscTypes.isPlayer2 && <div className={`circle circle-red circle--hover-${hoverDiscLocation}` + discIsDropping && `circle--drop-${discIsDropping}`}></div>} */}
-        </>
-      )
-    }
     // Renders default a non-visible circle, to avoid spacing problems
-    if (weHaveAWinnerAnnouncement) {
+    if(weHaveAWinnerAnnouncement) {
       return (
         <>
           <div className="circle circle-white"></div>
         </>
       )
+    } else {
+      return (
+        <>
+          {currentPlayer === DiscTypes.isPlayer1 && (<div className={`circle circle-yellow circle--hover-${hoverDiscLocation} ${discIsDropping ? `circle--drop-${discIsDropping}` : ''}` }></div>)}
+          {currentPlayer === DiscTypes.isPlayer2 && (<div className={`circle circle-red circle--hover-${hoverDiscLocation} ${discIsDropping ? `circle--drop-${discIsDropping}` : ''}`}></div>)}
+        </>
+      )
     }
   }
 
+  const onRowHover = (columnId) => {
+    // The hover disc animation will be delayed if a disc is being dropped
+    var waitTime = discIsDropping ? 1000 : 0;
+    setTimeout(() => {
+      setHoverDiscLocation(columnId + 1)
+    }, waitTime);
+  }
+
   const dropInADisc = (columnId) => {
+    // Disables discs after a win!
+    if (weHaveAWinnerAnnouncement) {
+      return;
+    }
     // Checks if column isn't already full
     if (individualGridHeightPerColumn[columnId] <= 0) {
       setShowColumnIsFullError(true);
       return;
     }
-    // Disables discs after a win!
-    if (weHaveAWinnerAnnouncement) {
-      return;
-    }
-    // // Shows dropping disc visual
-    // const dropDiscOnHeight = columnId;
-    // setDiscIsDropping(dropDiscOnHeight);
 
-    // // Waits for drop visual to end
-    // setTimeout(() => {
+    // Shows dropping disc visual
+    const dropDiscOnHeight = individualGridHeightPerColumn[columnId];
+    console.log('dropdisconheight', dropDiscOnHeight);
+    setDiscIsDropping(dropDiscOnHeight);
+
+    //Waits for drop visual to end
+    setTimeout(() => {
       setDiscIsDropping(null);
       setShowColumnIsFullError(false);
       updateConnectFourGrid(columnId);
       updateIndividualColumnHeight(columnId);
-      finishUpRound();  
-    // }, 1000);
-    
+      finishUpRound();
+    }, 1000);
   }
 
   const updateConnectFourGrid = (columnId) => {
@@ -135,8 +141,7 @@ const GameGrid = () => {
                   <td
                     key={columnId}
                     onClick={() => dropInADisc(columnId)}
-                    onMouseEnter={() => setHoverDiscLocation(columnId + 1)}
-                    // onMouseLeave={() => setHoverDiscLocation(null)}
+                    onMouseEnter={() => onRowHover(columnId)}
                     >
                       {renderDiscInGrid(column)}
                   </td>

@@ -140,7 +140,7 @@ const GameGrid = () => {
               {row.map((column, columnId) => (
                   <td
                     key={columnId}
-                    onClick={() => dropInADisc(columnId)}
+                    onClick={() => !discIsDropping && dropInADisc(columnId)}
                     onMouseEnter={() => onRowHover(columnId)}
                     >
                       {renderDiscInGrid(column)}

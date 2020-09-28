@@ -23,7 +23,7 @@ table {
   text-transform: uppercase;
   cursor: pointer;
   color: #fff;
-  background-color: blue;
+  background-color: $blue;
   border: 0;
   padding: 6px 16px;
   border-radius: 4px;
@@ -55,13 +55,13 @@ table {
   border-radius: 50%;
   display: inline-block;
   &-white {
-    background-color: #fff;
+    background-color: $white;
   }
   &-red{
-    background-color: #FF0000;
+    background-color: $red;
   }
   &-yellow{
-    background-color: #FFFF00;
+    background-color: $yellow;
   }
   &--hover {
     visibility: visible;

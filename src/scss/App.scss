@@ -17,10 +17,10 @@
   border-radius: 50%;
   display: inline-block;
   &-red{
-    background-color: #FF0000;
+    background-color: $red;
   }
   &-yellow{
-    background-color: #FFFF00;
+    background-color: $yellow;
   }
 }
 

@@ -133,7 +133,7 @@ const GameGrid = () => {
   return (
     <div>
       {renderHoverDiscAboveGrid()}
-      <table className={`table ${weHaveAWinnerAnnouncement && ' table--default'}`}>
+      <table className={'table' + (weHaveAWinnerAnnouncement ? ' table--default' : '')}>
         <tbody>
           {connectFourGrid && connectFourGrid.map((row, rowId) => (
             <tr key={rowId}>

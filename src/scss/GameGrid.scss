@@ -1,5 +1,6 @@
 :root {
   --dropHeight: 155px;
+  --oneColumnHeight: 4.05vw;
 }
 
 @import "../scss/variables";
@@ -71,14 +72,17 @@ table {
 @for $i from 1 through 8 {
   .circle--hover {
     &-#{$i} {
-      display: inline-block;
-      margin-left: #{(((43 / 6) * $i) - 28.5) * 1%};
+      margin-left: #{calc(calc(7vw * #{$i}) - 28vw)};
     }
   }
+}
+
+// Animation of the disc drop
+@for $i from 1 through 6 {
   .circle--drop{
     &-#{$i} {
       animation: DropDiscDown 1s ease-in 1;
-      --dropHeight: calc((80px * #{$i}) - 9px);
+      --dropHeight: calc(var(--oneColumnHeight) * #{$i});
     }
   }
 }
@@ -120,6 +124,14 @@ table {
 
 // Enlarges game grid on mobile screens
 @media only screen and (max-width: $portable) {
+  @for $i from 1 through 6 {
+    .circle--drop{
+      &-#{$i} {
+        --oneColumnHeight: 8.1vw;
+      }
+    }
+  }
+
   table {
     width: 50%;
     height: 50vw;
@@ -132,10 +144,10 @@ table {
     font-size: 4vw;
   }
 
-  @for $i from 1 through 8 {
+  @for $i from 1 through 7 {
     .circle--hover {
       &-#{$i} {
-        margin-left: #{((((85 / 6)) * $i) - 57) * 1%};
+        margin-left: #{calc(calc(14vw * #{$i}) - 56vw)};
       }
     }
   }
